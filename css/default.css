@@ -1835,8 +1835,8 @@ a.list-item {
   color: #363636;
 }
 .menu-list a.is-active {
-  background-color: #3273dc;
-  color: #fff;
+  background-color: #eef3fc;
+  color: #3273dc;
 }
 .menu-list li ul {
   border-left: 1px solid #dbdbdb;
@@ -10738,6 +10738,11 @@ body > .section {
   height: 100%;
   object-fit: cover;
 }
+.image .fill {
+  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+}
 .button.is-transparent {
   color: inherit;
   background: transparent;
@@ -10825,11 +10830,6 @@ article.article .content .message.message-immersive .message-body {
 .rtl .level.is-mobile .level-item:not(:last-child) {
   margin-left: 0.75rem;
   margin-right: 0;
-}
-.thumbnail {
-  object-fit: cover;
-  width: 100% !important;
-  height: 100% !important;
 }
 .table-overflow {
   overflow-x: auto;
