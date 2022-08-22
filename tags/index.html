@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>标签 - GU.DEV</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="GU.DEV"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GU.DEV"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="GU.DEV"><meta property="og:url" content="https://gujiaqi.dev/"><meta property="og:site_name" content="GU.DEV"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://gujiaqi.dev/img/og_image.png"><meta property="article:author" content="Droid"><meta property="article:tag" content="spring cloud"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://gujiaqi.dev/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://gujiaqi.dev"},"headline":"GU.DEV","image":["https://gujiaqi.dev/img/og_image.png"],"author":{"@type":"Person","name":"Droid"},"publisher":{"@type":"Organization","name":"GU.DEV","logo":{"@type":"ImageObject","url":{"text":"GU.DEV","logoUrl":"/img/favicon.svg"}}},"description":null}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-145376170-1" async></script><script>window.dataLayer = window.dataLayer || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>标签 - GU.DEV</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="GU.DEV"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="GU.DEV"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="GU.DEV"><meta property="og:url" content="https://gujiaqi.dev/"><meta property="og:site_name" content="GU.DEV"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://gujiaqi.dev/img/og_image.png"><meta property="article:author" content="Droid"><meta property="article:tag" content="spring cloud"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://gujiaqi.dev/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://gujiaqi.dev"},"headline":"GU.DEV","image":["https://gujiaqi.dev/img/og_image.png"],"author":{"@type":"Person","name":"Droid"},"publisher":{"@type":"Organization","name":"GU.DEV","logo":{"@type":"ImageObject","url":{"text":"GU.DEV","logoUrl":"/img/favicon.svg"}}},"description":null}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-145376170-1" async></script><script>window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
@@ -9,23 +9,24 @@
           if (!location.hash) {
             return;
           }
-          Array
-              .from(document.querySelectorAll('.tab-content'))
-              .forEach($tab => {
-                  $tab.classList.add('is-hidden');
-              });
-          Array
-              .from(document.querySelectorAll('.tabs li'))
-              .forEach($tab => {
-                  $tab.classList.remove('is-active');
-              });
+
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
           const $activeTab = document.querySelector(location.hash);
           if ($activeTab) {
               $activeTab.classList.remove('is-hidden');
-          }
-          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
           }
       }
       switchTab();
